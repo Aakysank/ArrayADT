@@ -24,51 +24,56 @@ public:
 
     }
 
-
+    //Time complexity - O(1).
     void append(T& x)
     {
-        int final_index = _actual_size;
-        if (_actual_size >= _max_capacity)
-            final_index = _actual_size % _max_capacity;
+        int final_index = _actual_size; //Time taken 1 unit
+        if (_actual_size >= _max_capacity)//Time taken 1 unit
+            final_index = _actual_size % _max_capacity;//Time taken 1 unit
 
-        data[final_index] = x;
-        _actual_size++;
+        data[final_index] = x;//Time taken 1 unit
+        _actual_size++;//Time taken 1 unit
     }
 
+    //Time complexity - O(1).
     void append(T&& x)
     {
-        int final_index = _actual_size;
-        if (_actual_size >= _max_capacity)
-            final_index = _actual_size % _max_capacity;
+        int final_index = _actual_size;//Time taken 1 unit
+        if (_actual_size >= _max_capacity)//Time taken 1 unit
+            final_index = _actual_size % _max_capacity;//Time taken 1 unit
 
-        data[final_index] = x;
-        _actual_size++;
+        data[final_index] = x;//Time taken 1 unit
+        _actual_size++;//Time taken 1 unit
     }
     
+    //Time complexity
+    // Best case - O(1). Worst case - O(n)
     void Insert(int index, T& x)
     {
-        for (int i = _actual_size; i > index; i--)
+        for (int i = _actual_size; i > index; i--)//Time taken n+1 units
             data[i] = data[i - 1];
             
-        data[index] = x;
-        _actual_size++;
+        data[index] = x;//Time taken 1 unit
+        _actual_size++;//Time taken 1 unit
     }
 
+    //Time complexity
+    // Best case - O(1). Worst case - O(n)
     void Insert(int index, T&& x)
     {
-        for (int i = _actual_size; i > index; i--)
+        for (int i = _actual_size; i > index; i--)//Time taken n+1 units
             data[i] = data[i - 1];
 
-        data[index] = x;
-        _actual_size++;
+        data[index] = x;//Time taken 1 unit
+        _actual_size++;//Time taken 1 unit
     }
 
     void Delete(int index)
     {
-        for (int i = index; i < _actual_size; i++)
+        for (int i = index; i < _actual_size; i++)//Time taken n+1 units
             data[i] = data[i + 1];
 
-        _actual_size--;
+        _actual_size--;//Time taken 1 unit
     }
 
     size_t getSize() { return _actual_size;}
@@ -81,6 +86,68 @@ public:
             s << data[i];
 
         return s;
+    }
+
+    int search(T &value)
+    {
+        //Linear search
+        //Time complexity - Best case O(1)
+        //Worst case - O(n)
+        for (int i = 0; i < _actual_size; i++)
+        {
+            if (data[i] == value)
+                return i;
+        }
+
+        //Improving linear search
+        //1. Transposition -- move the found element swap to previous index. Step by step time reduction
+        //2. Move to front -- move the found element and swap to the start of the array. Drastic reduction in time
+       //Transposition
+        /*for (int i = 0; i < _actual_size; i++)
+        {
+            if (data[i] == value)
+            {
+                if (i != 0)
+                {
+                    T temp = data[i - 1];
+                    data[i - 1] = data[i];
+                    data[i] = temp;
+
+                    return i-1;
+                }
+                else
+                    return 0;
+            }
+        }*/
+
+        //Move to front
+        /*for (int i = 0; i < _actual_size; i++)
+        {
+            if (data[i] == value)
+            {
+                T temp = data0];
+                data[0] = data[i];
+                data[i] = temp;
+
+                return 0;
+            }
+        }*/
+
+        return -1;
+    }
+
+    int search(T&& value)
+    {
+        //Linear search
+       //Time complexity - Best case O(1)
+       //Worst case - O(n)
+        for (int i = 0; i < _actual_size; i++)
+        {
+            if (data[i] == value)
+                return i;
+        }
+
+        return -1;
     }
 };
 int main()
